@@ -6,7 +6,6 @@ pipeline {
         docker {
           image 'gradle'
         }
-
       }
       steps {
         sh 'chmod +x gradlew && ./gradlew build'
