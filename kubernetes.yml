@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: springboot-sample
-          image: <your-registry>/<your-image>:<your-tag># Docker container with our node app
+          image: jajapaul/spring-boot:latest
           ports:
             - containerPort: 8080
 ---
@@ -27,9 +27,9 @@ metadata:
     name: sample-spring-boot
 spec:
   ports:
-    - port: 8080 # The service will publish the application on the default http port(80)
+    - port: 80 # The service will publish the application on the default http port(80)
       targetPort: 8080
       protocol: TCP
   selector:
     app: sample-spring-boot
-  type: LoadBalancer # Type loadbalancer will use the underlying cloud provider to create an external url for accessing the app
+  type: NodePort # Type loadbalancer will use the underlying cloud provider to create an external url for accessing the app
