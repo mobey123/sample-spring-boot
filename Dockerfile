@@ -9,7 +9,7 @@ USER root
 ENV APP_LOC="/usr/src/app"
 
 WORKDIR $APP_LOC
-RUN ls .
-COPY build/libs/app.jar $APP_LOC/app.jar
+RUN echo $(ls .)
+COPY src/build/libs/app.jar $APP_LOC/app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]
