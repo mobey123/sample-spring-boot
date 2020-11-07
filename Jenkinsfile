@@ -9,7 +9,7 @@ pipeline {
 
       }
       steps {
-        sh 'chmod +x gradlew && ./gradlew --info build'
+        sh 'chmod +x gradlew && ./gradlew build'
       }
     }
 
@@ -21,7 +21,7 @@ pipeline {
 
       }
       steps {
-        sh 'docker build -t jajapaul/spring-boot:1.0 -f ./Dockerfile .'
+        sh 'docker build -t jajapaul/spring-boot:1.0 -f ./Dockerfile ./'
       }
     }
 
