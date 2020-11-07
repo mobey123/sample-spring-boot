@@ -1,6 +1,7 @@
 pipeline {
-  agent none
-
+  agent{
+  node ('jenkins-slave')
+  }
   environment {
     registry = "jajapaul/spring-boot"
     registryCredential = 'dockercreds'
