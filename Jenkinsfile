@@ -46,17 +46,20 @@ pipeline {
     }
     
 
-    stage('app deploy') {
-      agent {
-        docker {
-          image 'busybox'
-        }
-
-      }
-      steps {
-        sh 'echo kube deploy'
+  stage('app deploy') {
+    agent {
+       kubernetes {
+      	cloud 'kubernetes'
       }
     }
+        steps {
+        script {
+          kubernetesDeploy(configs: "kubernetes.yml", kubeconfigId: "MINIKUBECONFIG")
+        }
+      }
+    }
+    
+     
 
   }
 }
