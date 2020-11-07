@@ -9,13 +9,11 @@ pipeline {
 
       }
       steps {
-        sh 'chmod +x gradlew && ./gradlew build'
+        sh 'chmod +x gradlew && ./gradlew --info build'
       }
     }
 
-
-
-      stage('docker build') {
+    stage('docker build') {
       agent {
         docker {
           image 'docker'
