@@ -13,12 +13,7 @@ pipeline {
    stages {
 
      
-      stage('Remove Unused docker image') {
-      steps{
-        sh "docker system prune"
 
-      }
-    }
      
      
     stage('build') {
@@ -35,7 +30,12 @@ pipeline {
 
 
 
+      stage('Remove Unused docker image') {
+      steps{
+        sh "docker system prune"
 
+      }
+    }
 
 
     stage('Building image') {
