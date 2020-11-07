@@ -21,7 +21,7 @@ pipeline {
 
       }
       steps {
-        sh 'docker build -t jajapaul/spring-boot:1.0 .'
+        sh 'docker build -t jajapaul/spring-boot:1.0 -f ./Dockerfile .'
       }
     }
 
