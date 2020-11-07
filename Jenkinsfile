@@ -5,13 +5,7 @@ pipeline {
     registryCredential = 'dockercreds'
     dockerImage = ''
     }
-  stages {
-      stage('Remove Unused docker image') {
-      steps{
-        sh "docker system prune"
 
-      }
-    }
     stage('build') {
       agent {
         docker {
@@ -21,6 +15,13 @@ pipeline {
       }
       steps {
         sh 'chmod +x gradlew && ./gradlew build'
+      }
+    }
+   stages {
+      stage('Remove Unused docker image') {
+      steps{
+        sh "docker system prune"
+
       }
     }
 
