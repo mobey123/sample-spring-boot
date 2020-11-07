@@ -22,7 +22,7 @@ pipeline {
 
       }
       steps {
-        sh '/usr/local/bin/sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=/var/lib/jenkins/workspace/sample-spring-boot -Dsonar.projectBaseDir=/var/lib/jenkins/workspace/sample-spring-boot -Dsonar.projectKey=mobey123 -Dsonar.login=41ee7b87c4a67889d1cfac416339c02cf4b4aca1 -Dsonar.verbose=true'
+        sh '/usr/local/bin/sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=/var/jenkins_home/workspace/sample-spring-boot_master -Dsonar.projectBaseDir=/var/jenkins_home/workspace/sample-spring-boot_master -Dsonar.projectKey=mobey123 -Dsonar.login=41ee7b87c4a67889d1cfac416339c02cf4b4aca1 -Dsonar.verbose=true'
       }
     }
 
