@@ -16,12 +16,12 @@ pipeline {
     stage('docker build') {
       agent {
         docker {
-          image 'docker'
+          image 'docker-dev'
         }
 
       }
       steps {
-        sh 'docker build -t jajapaul/spring-boot:1.0 -f ./Dockerfile ./'
+        sh 'docker build -t jajapaul/spring-boot:1.0 .'
       }
     }
 
