@@ -8,9 +8,8 @@ USER root
 
 ENV APP_LOC="/usr/src/app"
 
-WORKDIR ./build
-
-COPY ./libs/spring-boot-0.0.1-SNAPSHOT.jar $APP_LOC/app.jar
+RUN ls ./src
+COPY ./build/libs/spring-boot-0.0.1-SNAPSHOT.jar $APP_LOC/app.jar
 WORKDIR $APP_LOC
 
 ENTRYPOINT ["java","-jar","app.jar"]
