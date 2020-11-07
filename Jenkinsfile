@@ -15,10 +15,11 @@ pipeline {
             }
             steps {
                 sh 'echo docker build'
+                    script {
                 def scannerHome = tool 'sonarqube'
                 withSonarQubeEnv('sonarqube') {
                     sh "${scannerHome}/bin/sonar-scanner"
-                }
+                }}
             }
         }
         stage('docker build') {
