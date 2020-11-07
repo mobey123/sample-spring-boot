@@ -8,6 +8,10 @@ pipeline {
     dockerImage = ''
     }
 
+
+
+   stages {
+
     stage('build') {
       agent {
         docker {
@@ -19,8 +23,11 @@ pipeline {
         sh 'chmod +x gradlew && ./gradlew build'
       }
     }
-    
-   stages {
+
+
+
+
+
       stage('Remove Unused docker image') {
       steps{
         sh "docker system prune"
