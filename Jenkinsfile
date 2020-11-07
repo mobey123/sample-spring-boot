@@ -1,5 +1,7 @@
 pipeline {
+
   agent none
+
   environment {
     registry = "jajapaul/spring-boot"
     registryCredential = 'dockercreds'
@@ -17,6 +19,7 @@ pipeline {
         sh 'chmod +x gradlew && ./gradlew build'
       }
     }
+    
    stages {
       stage('Remove Unused docker image') {
       steps{
