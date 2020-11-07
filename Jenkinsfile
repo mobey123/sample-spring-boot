@@ -25,6 +25,18 @@ pipeline {
         }
       }
     }
+    
+    stage('Push Image') {
+      steps{
+        script {
+          docker.withRegistry( '', dockercreds ) {
+            dockerImage.push("$BUILD_NUMBER")
+             dockerImage.push('latest')
+
+          }
+        }
+      }
+    }
    
 
     stage('app deploy') {
