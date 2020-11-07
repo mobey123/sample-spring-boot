@@ -14,7 +14,6 @@ pipeline {
                 docker { image 'busybox' }
             }
             steps {
-                sh 'echo sonarqube'
                 def scannerHome = tool 'sonarqube'
                 withSonarQubeEnv('sonarqube') {
                     sh "${scannerHome}/bin/sonar-scanner"
