@@ -1,16 +1,11 @@
 pipeline {
-  agent{
-  node ('jenkins-slave')
-  }
-  environment {
-    registry = "jajapaul/spring-boot"
-    registryCredential = 'dockercreds'
-    dockerImage = ''
+  agent {
+    node {
+      label 'jenkins-slave'
     }
 
+  }
   stages {
-
-      
     stage('build') {
       agent {
         docker {
@@ -23,46 +18,48 @@ pipeline {
       }
     }
 
-
-   
-
     stage('Building image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build registry
         }
+
       }
     }
 
     stage('Push Image') {
-      steps{
+      steps {
         script {
           docker.withRegistry( '', registryCredential  ) {
             dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('latest')
+            dockerImage.push('latest')
 
           }
         }
-      }
-    }
-    
-
-  stage('app deploy') {
-    agent {
-       kubernetes {
-      	cloud 'kubernetes'
-        defaultContainer 'jnlp'
 
       }
     }
-        steps {
+
+    stage('app deploy') {
+      agent {
+        kubernetes {
+          cloud 'kubernetes'
+          defaultContainer 'jnlp'
+        }
+
+      }
+      steps {
         script {
           kubernetesDeploy(configs: "kubernetes.yml", kubeconfigId: "MINIKUBECONFIG")
         }
+
       }
     }
-    
-     
 
+  }
+  environment {
+    registry = 'jajapaul/spring-boot'
+    registryCredential = 'dockercreds'
+    dockerImage = ''
   }
 }
