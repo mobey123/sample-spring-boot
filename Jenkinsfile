@@ -27,15 +27,15 @@ pipeline {
       }
     }
 
-    stage('docker build') {
+      stage('docker build') {
       agent {
         docker {
-          image 'busybox'
+          image 'docker'
         }
 
       }
       steps {
-        sh 'echo docker build'
+        sh 'docker build -t jajapaul/spring-boot:1.0 .'
       }
     }
 
