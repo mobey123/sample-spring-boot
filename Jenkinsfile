@@ -18,18 +18,13 @@ pipeline {
       }
     }
 
-   stage('docker build') {
-      agent {
-        docker {
-          image 'docker'
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
         }
-
-      }
-      steps {
-        sh 'docker build -t jajapaul/spring-boot:1.0 .'
       }
     }
-
    
 
     stage('app deploy') {
