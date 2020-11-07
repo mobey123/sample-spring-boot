@@ -25,7 +25,12 @@ pipeline {
         }
       }
     }
-    
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker system prune"
+
+      }
+    }
     stage('Push Image') {
       steps{
         script {
