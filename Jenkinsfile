@@ -8,6 +8,8 @@ pipeline {
     }
 
   stages {
+
+      
     stage('build') {
       agent {
         docker {
