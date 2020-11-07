@@ -13,19 +13,11 @@ pipeline {
       }
     }
 
-    stage('sonarqube') {
-      steps {
-        sh 'echo docker build'
-        script {
-          def scannerHome = tool 'sonarqube'
-          withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
-          }
+   stage('sonarqube') {
+            docker.image('newtmitch/sonar-scanner').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint="" --net jenkins_jenkins') {
+            sh "/usr/local/bin/sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=/var/lib/jenkins/workspace/sample-spring-boot -Dsonar.projectBaseDir=/var/lib/jenkins/workspace/sample-spring-boot -Dsonar.projectKey=mobey123 -Dsonar.login=41ee7b87c4a67889d1cfac416339c02cf4b4aca1 -Dsonar.verbose=true"
         }
-
-      }
-    }
-
+        }
     stage('docker build') {
       agent {
         docker {
