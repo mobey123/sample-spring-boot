@@ -12,10 +12,6 @@ pipeline {
 
    stages {
 
-     
-
-     
-     
     stage('build') {
       agent {
         docker {
@@ -30,13 +26,14 @@ pipeline {
 
 
 
+
+
       stage('Remove Unused docker image') {
       steps{
         sh "docker system prune"
 
       }
     }
-
 
     stage('Building image') {
       steps{
