@@ -10,6 +10,9 @@ pipeline {
             }
         }
         stage('sonarqube') {
+             agent {
+                docker { image 'sonarqube' }
+            }
        
             steps {
                 sh 'echo docker build'
