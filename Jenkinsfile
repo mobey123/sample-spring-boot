@@ -10,9 +10,7 @@ pipeline {
             }
         }
         stage('sonarqube') {
-            agent {
-                docker { image 'busybox' }
-            }
+       
             steps {
                 sh 'echo docker build'
                     script {
