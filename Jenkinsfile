@@ -50,6 +50,8 @@ pipeline {
     agent {
        kubernetes {
       	cloud 'kubernetes'
+        defaultContainer 'jnlp'
+
       }
     }
         steps {
