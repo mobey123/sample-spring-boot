@@ -1,5 +1,10 @@
 pipeline {
   agent none
+  environment {
+    registry = "jajapaul/spring-boot"
+    registryCredential = 'dockercreds'
+    dockerImage = ''
+    }
   stages {
     stage('build') {
       agent {
@@ -14,23 +19,13 @@ pipeline {
     }
 
     stage('docker build') {
-      agent {
-        docker {
-          image 'docker'
-        }
-
-      }
-      steps {
-        sh 'docker build -t jajapaul/spring-boot:1.0 .'
-      }
-    }
-
-    stage('docker push') {
      
       steps {
-        docker.build registry + ":$BUILD_NUMBER"
+       docker.build registry + ":1.0"
       }
     }
+
+   
 
     stage('app deploy') {
       agent {
