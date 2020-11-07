@@ -26,14 +26,9 @@ pipeline {
     }
 
     stage('docker push') {
-      agent {
-        docker {
-          image 'busybox'
-        }
-
-      }
+     
       steps {
-        sh 'echo docker push'
+        docker.build registry + ":$BUILD_NUMBER"
       }
     }
 
