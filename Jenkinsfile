@@ -1,7 +1,10 @@
 pipeline {
-  agent any
-
-  
+  agent none
+  environment {
+    registry = "jajapaul/spring-boot"
+    registryCredential = 'dockercreds'
+    dockerImage = ''
+    }
   stages {
     stage('build') {
       agent {
@@ -14,6 +17,7 @@ pipeline {
         sh 'chmod +x gradlew && ./gradlew build'
       }
     }
+
     stage('sonarqube') {
       agent {
         docker {
@@ -29,47 +33,52 @@ pipeline {
     }
 
     stage('Building image') {
-      steps {
+      steps{
         script {
           dockerImage = docker.build registry
         }
-
       }
     }
 
     stage('Push Image') {
-      steps {
+      steps{
         script {
           docker.withRegistry( '', registryCredential  ) {
             dockerImage.push("$BUILD_NUMBER")
-            dockerImage.push('latest')
+             dockerImage.push('latest')
 
           }
         }
-
       }
     }
+    
 
     stage('app deploy') {
-      agent {
-        kubernetes {
-          cloud 'kubernetes'
-          defaultContainer 'jnlp'
-        }
-
+    agent {
+       kubernetes {
+      	cloud 'kubernetes'
+      	defaultContainer 'jnlp'
       }
-      steps {
+    }
+        steps {
         script {
-          kubernetesDeploy(configs: "kubernetes.yml", kubeconfigId: "MINIKUBECONFIG")
+          kubernetesDeploy(configs: "hellodocker.yml", kubeconfigId: "MINIKUBECONFIG")
         }
+      }
+    }
+  
+    
+    
+  
+    }
+
+        stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $imagename:$BUILD_NUMBER"
+         sh "docker rmi $imagename:latest"
 
       }
     }
 
-  }
-  environment {
-    registry = 'jajapaul/spring-boot'
-    registryCredential = 'dockercreds'
-    dockerImage = ''
   }
 }
