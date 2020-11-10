@@ -6,19 +6,6 @@ pipeline {
     dockerImage = ''
     }
   stages {
-    stage('build') {
-      agent {
-        docker {
-          image 'gradle'
-        }
-
-      }
-      steps {
-        sh 'chmod +x gradlew && ./gradlew build'
-      }
-    }
-
-
 
     stage('sonarqube') {
       agent {
@@ -35,6 +22,25 @@ pipeline {
     }
 
 
+
+
+
+
+    stage('build') {
+      agent {
+        docker {
+          image 'gradle'
+        }
+
+      }
+      steps {
+        sh 'chmod +x gradlew && ./gradlew build'
+      }
+    }
+
+
+
+ 
 
 
 
