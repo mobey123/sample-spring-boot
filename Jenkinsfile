@@ -53,24 +53,24 @@ pipeline {
     }
     
 
-    stage('app deploy') {
-    agent {
-       kubernetes {
-      	cloud 'kubernetes'
-      	defaultContainer 'jnlp'
-      }
-    }
-        steps {
-        script {
-          kubernetesDeploy(configs: "hellodocker.yml", kubeconfigId: "MINIKUBECONFIG")
-        }
-      }
-    }
+    // stage('app deploy') {
+    // agent {
+    //    kubernetes {
+    //   	cloud 'kubernetes'
+    //   	defaultContainer 'jnlp'
+    //   }
+    // }
+    //     steps {
+    //     script {
+    //       kubernetesDeploy(configs: "hellodocker.yml", kubeconfigId: "MINIKUBECONFIG")
+    //     }
+    //   }
+    // }
   
     
     
   
-    }
+    
 
         stage('Remove Unused docker image') {
       steps{
